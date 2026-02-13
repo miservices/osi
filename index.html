@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michigan Office of State Intelligence | OSI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #05070d;
+  color: #e6edf3;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+header {
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.logo span {
+  color: #58a6ff;
+}
+
+nav a {
+  color: #c9d1d9;
+  text-decoration: none;
+  margin-left: 30px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #58a6ff;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 80px;
+}
+
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 54px;
+  max-width: 800px;
+  line-height: 1.1;
+  background: linear-gradient(90deg, #58a6ff, #79c0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #8b949e;
+  max-width: 650px;
+}
+
+.buttons {
+  margin-top: 40px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  margin-right: 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-primary {
+  background: #1f6feb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #388bfd;
+  transform: translateY(-3px);
+}
+
+.btn-secondary {
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+}
+
+.btn-secondary:hover {
+  border-color: #58a6ff;
+  color: #58a6ff;
+  transform: translateY(-3px);
+}
+
+.section {
+  padding: 100px 80px;
+}
+
+.section h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 30px;
+  border-radius: 12px;
+  transition: 0.4s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  border-color: #58a6ff;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  font-size: 14px;
+  color: #6e7681;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<header>
+  <div class="logo">MICHIGAN <span>OSI</span></div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Careers</a>
+    <a href="#">Report a Threat</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Protecting the Sovereignty, Security, and Interests of the State of Michigan</h1>
+  <p>
+    The Office of State Intelligence (OSI) is a principal office within the executive branch of Michigan, responsible for the collection, analysis, and dissemination of intelligence relating to threats to this state — including foreign intelligence, counterintelligence, cyber threats, terrorism, and espionage.
+  </p>
+  <div class="buttons">
+    <a href="#" class="btn btn-primary">Apply for Service</a>
+    <a href="#" class="btn btn-secondary">Report a Threat</a>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Core Responsibilities</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Foreign Intelligence</h3>
+      <p>Monitoring and assessing foreign activities impacting Michigan’s economic, technological, and security interests.</p>
+    </div>
+    <div class="card">
+      <h3>Counterintelligence</h3>
+      <p>Identifying and disrupting espionage, infiltration, and unlawful foreign influence within the state.</p>
+    </div>
+    <div class="card">
+      <h3>Cyber Defense</h3>
+      <p>Detecting and mitigating cyber threats targeting state infrastructure, public systems, and industry.</p>
+    </div>
+    <div class="card">
+      <h3>Intelligence Assessments</h3>
+      <p>Providing intelligence briefings to the Governor and authorized state officials.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Michigan Office of State Intelligence — Conceptual Design
+</footer>
+
+<script>
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+const letters = "010101OSIINTELMICHIGAN";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = [];
+
+for(let x = 0; x < columns; x++) {
+  drops[x] = 1;
+}
+
+function draw() {
+  ctx.fillStyle = "rgba(5,7,13,0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#1f6feb";
+  ctx.font = fontSize + "px monospace";
+
+  for(let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+      drops[i] = 0;
+
+    drops[i]++;
+  }
+}
+
+setInterval(draw, 35);
+</script>
+
+</body>
+</html>
